@@ -10,19 +10,14 @@ script = "Auto Post Discord"
 print("Script: " + script)
 print("===========================================\n")
 
-time.sleep(1)
+channel_ids = []
+while True:
+    channel_id = input("Masukkan ID channel (tekan Enter untuk selesai): ")
+    if not channel_id:
+        break
+    channel_ids.append(channel_id)
 
-channel_id = input("Masukkan ID channel: ")
-waktu1 = int(input("Set Waktu Hapus Pesan: "))
-waktu2 = int(input("Set Waktu Kirim Pesan: "))
-
-time.sleep(1)
-print("3")
-time.sleep(1)
-print("2")
-time.sleep(1)
-print("1")
-time.sleep(1)
+waktu = int(input("Set Waktu Kirim Pesan (dalam detik): "))
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -33,6 +28,7 @@ with open("token.txt", "r") as f:
     authorization = f.readline().strip()
 
 while True:
+    for channel_id in channel_ids:
         channel_id = channel_id.strip()
 
         payload = {
@@ -44,26 +40,7 @@ while True:
         }
 
         r = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", data=payload, headers=headers)
-        print(Fore.WHITE + "Sent message: ")
+        print(Fore.WHITE + "Sent message to channel " + channel_id + ": ")
         print(Fore.YELLOW + payload['content'])
 
-        response = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages', headers=headers)
-
-        if response.status_code == 200:
-            messages = response.json()
-            if len(messages) == 0:
-                is_running = False
-                break
-            else:
-                time.sleep(waktu1)
-
-                message_id = messages[0]['id']
-                response = requests.delete(f'https://discord.com/api/v9/channels/{channel_id}/messages/{message_id}', headers=headers)
-                if response.status_code == 204:
-                    print(Fore.GREEN + f'Pesan dengan ID {message_id} berhasil dihapus')
-                else:
-                    print(Fore.RED + f'Gagal menghapus pesan dengan ID {message_id}: {response.status_code}')
-        else:
-            print(f'Gagal mendapatkan pesan di channel: {response.status_code}')
-
-        time.sleep(waktu2)
+        time.sleep(waktu)
