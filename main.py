@@ -4,16 +4,9 @@ import time
 import os
 from colorama import Fore
 
-print("   ____          ____       _                    ")
-print("  | __ )  __ _  |  _ \ __ _| |_ ___ _ __   __ _  ")
-print("  |  _ \ / _' | | |_) / _' | __/ _ \ '_ \ / _' | ")
-print("  | |_) | (_| | |  __/ (_| | ||  __/ | | | (_| | ")
-print("  |____/ \__, | |_|   \__,_|\__\___|_| |_|\__, | ")
-print("         |___/                            |___/  \n")
-print("=================================================")
 author = "Aray"
 print("Author: " + author)
-script = "Push Rank Discord"
+script = "Auto Post Discord"
 print("Script: " + script)
 print("===========================================\n")
 
