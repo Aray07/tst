@@ -16,14 +16,14 @@ waktu = int(input("Set Waktu Kirim Pesan (dalam detik): "))
 os.system('cls' if os.name == 'nt' else 'clear')
 
 with open("pesan.txt", "r") as f:
-    messages = f.read().splitlines()
+    lines = f.readlines()
 
 with open("token.txt", "r") as f:
     authorization = f.readline().strip()
 
 while True:
-    # Gabungkan pesan menjadi satu pengiriman jika lebih dari satu baris
-    message = '\n'.join(random.choices(messages, k=random.randint(1, 5)))
+    # Menggabungkan beberapa baris pesan menjadi satu kalimat atau paragraf
+    message = ' '.join(lines[:random.randint(1, len(lines))])
 
     payload = {
         'content': message
