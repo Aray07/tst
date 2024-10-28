@@ -1,28 +1,19 @@
-# config.py
+import os
 
-   # Channel IDs
-   channel_ids = {
-       'channel_1': 'GANTI_ID',
-       'channel_2': 'GANTI_ID',
-       'channel_3': 'GANTI_ID'
-   }
+# Channel IDs
+channel_ids = {f'channel_{i}': os.getenv(f'CHANNEL_{i}_ID') for i in range(1, 1000)}
 
-   # Messages
-   messages = {
-       channel_ids['channel_1']: "ISI_DISINI",
-       channel_ids['channel_2']: "ISI_DISINI",
-       channel_ids['channel_3']: "ISI_DISINI"
-   }
+# Messages
+messages = {channel_ids[f'channel_{i}']: os.getenv(f'CHANNEL_{i}_MSG') for i in range(1, 1000)}
 
-   # Discord Bot Token
-   token = 'Token_Discord_LU'
+# Discord Bot Token
+token = os.getenv('DISCORD_TOKEN')
 
-   # Webhook URL
-   webhook_url = "WEBHOOK_URL_LU"
+# Webhook URL
+webhook_url = os.getenv('WEBHOOK_URL')
 
-   # Delays in minutes
-   delays = {
-       'channel_1': (60, 70),
-       'channel_2': (10, 20),
-       'channel_3': (60, 70)
-   }
+# Delays in minutes
+delays = {
+    f'channel_{i}': (int(os.getenv(f'CHANNEL_{i}_DELAY_MIN')), int(os.getenv(f'CHANNEL_{i}_DELAY_MAX')))
+    for i in range(1, 1000)
+}
